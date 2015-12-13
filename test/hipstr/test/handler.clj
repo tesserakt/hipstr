@@ -11,3 +11,8 @@
   (testing "not-found route"
     (let [response (app (request :get "/invalid"))]
       (is (= 404 (:status response))))))
+
+(deftest missing-email-address-redisplays-the-form
+  (let [response (app (request :post "/signup"
+                               {:username "TheDude" :password "123456789"}))]
+    (is (= 200 (:status response)))))
